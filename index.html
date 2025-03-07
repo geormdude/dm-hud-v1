@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DM HUD - Dungeon Master's Heads-Up Display</title>
+    <!-- Main Styles -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- Component Styles -->
+    <link rel="stylesheet" href="styles/components/header.css">
+    <link rel="stylesheet" href="styles/components/story-navigator.css">
+    <link rel="stylesheet" href="styles/components/character-manager.css">
+    <link rel="stylesheet" href="styles/components/combat-console.css">
+    <link rel="stylesheet" href="styles/components/settings.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Header with Navigation -->
+        <header id="main-header">
+            <nav id="tab-navigation">
+                <ul>
+                    <li><button data-tab="story" class="tab-button active">Story</button></li>
+                    <li><button data-tab="characters" class="tab-button">Characters</button></li>
+                    <li><button data-tab="combat" class="tab-button">Combat</button></li>
+                    <li><button data-tab="settings" class="tab-button">Settings</button></li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- Main Content Area -->
+        <main id="main-content">
+            <!-- Story Section -->
+            <section id="story-section" class="tab-content active">
+                <div id="story-navigator">
+                    <div id="thread-list" class="panel">
+                        <!-- Thread list content will be dynamically inserted -->
+                    </div>
+                    <div id="beat-display" class="panel">
+                        <!-- Beat display content will be dynamically inserted -->
+                    </div>
+                    <div id="relationship-map" class="panel">
+                        <!-- Relationship map will be dynamically inserted -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Characters Section -->
+            <section id="characters-section" class="tab-content">
+                <div id="character-manager">
+                    <div id="character-list" class="panel">
+                        <!-- Character list content will be dynamically inserted -->
+                    </div>
+                    <div id="npc-list" class="panel">
+                        <!-- NPC list content will be dynamically inserted -->
+                    </div>
+                    <div id="character-detail" class="panel">
+                        <!-- Character details will be dynamically inserted -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Combat Section -->
+            <section id="combat-section" class="tab-content">
+                <div id="combat-console">
+                    <div id="combat-controls" class="panel">
+                        <!-- Combat control buttons will be dynamically inserted -->
+                    </div>
+                    <div id="initiative-list" class="panel">
+                        <!-- Initiative list will be dynamically inserted -->
+                    </div>
+                    <div id="combat-detail" class="panel">
+                        <!-- Combat details will be dynamically inserted -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Settings Section -->
+            <section id="settings-section" class="tab-content">
+                <div id="settings-manager">
+                    <div id="display-settings" class="panel">
+                        <!-- Display settings will be dynamically inserted -->
+                    </div>
+                    <div id="data-management" class="panel">
+                        <!-- Data management options will be dynamically inserted -->
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Utility Scripts -->
+    <script src="scripts/utils/data-utils.js"></script>
+    <script src="scripts/utils/ui-utils.js"></script>
+    <script src="scripts/utils/event-utils.js"></script>
+
+    <!-- State Management -->
+    <script src="scripts/state/state-manager.js"></script>
+
+    <!-- Component Scripts -->
+    <script src="scripts/components/header.js"></script>
+    <script src="scripts/components/story-navigator.js"></script>
+    <script src="scripts/components/character-manager.js"></script>
+    <script src="scripts/components/combat-console.js"></script>
+    <script src="scripts/components/settings.js"></script>
+
+    <!-- Main Application Script -->
+    <script src="scripts/app.js"></script>
+</body>
+</html> 

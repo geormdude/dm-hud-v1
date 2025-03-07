@@ -21,102 +21,252 @@ The application uses a centralized state manager with immutable update patterns:
 ```javascript
 {
   // UI state
-  activeTab: 'storyNavigator',
-  focusMode: false,
+  ui: {
+    activeTab: 'story',
+    focusMode: false,
+    theme: 'dark',
+    panelSizes: {
+      story: { threadList: 25, beatDisplay: 50, relationshipMap: 25 },
+      characters: { characterList: 25, npcList: 25, characterDetail: 50 },
+      combat: { combatControls: 20, initiativeList: 30, combatDetail: 50 }
+    },
+    lastSaved: null,
+    sidebarCollapsed: false
+  },
   
   // Story state
-  campaign: { /* campaign data */ },
-  plotThreads: [ /* array of threads */ ],
-  storyBeats: [ /* array of story beats */ ],
+  story: {
+    campaign: {
+      id: '',
+      name: '',
+      description: '',
+      setting: '',
+      currentSession: 1
+    },
+    plotThreads: [ /* array of threads */ ],
+    storyBeats: [ /* array of story beats */ ],
+    locations: [],
+    notes: []
+  },
   
   // Character state
-  playerCharacters: [ /* array of PCs */ ],
-  npcs: [ /* array of NPCs */ ],
-  relationships: [ /* array of relationships */ ],
+  characters: {
+    playerCharacters: [ /* array of PCs */ ],
+    npcs: [ /* array of NPCs */ ],
+    relationships: [ /* array of relationships */ ],
+    factions: []
+  },
   
   // Combat state
-  inCombat: false,
-  currentEncounter: { /* encounter data */ },
-  initiative: [ /* array of combatants */ ],
-  round: 0,
-  activeIndex: -1
+  combat: {
+    inCombat: false,
+    currentEncounter: null,
+    initiative: [],
+    round: 0,
+    activeIndex: -1,
+    encounters: [],
+    conditions: []
+  },
+  
+  // Settings
+  settings: {
+    autosaveInterval: 60,
+    confirmBeforeDelete: true,
+    showHiddenInfo: false,
+    diceRollerEnabled: true,
+    soundEffectsEnabled: false,
+    notificationsEnabled: true
+  }
 }
 ```
 
-### Update Pattern
+### State Manager API
 
-All state updates flow through the state manager's `update()` method:
-
-```javascript
-StateManager.update('path.to.property', newValue);
-```
-
-Components observe state changes through event listeners:
+The state manager provides the following methods for state manipulation:
 
 ```javascript
-document.addEventListener('stateChanged', (e) => {
-  if (e.detail.path.startsWith('propertyPrefix')) {
-    this.render();
-  }
-});
+// Get state or subset of state
+StateManager.getState()
+StateManager.getState('path.to.property')
+
+// Update state
+StateManager.setState('path.to.property', newValue)
+
+// Array operations
+StateManager.addItem('array.path', newItem)
+StateManager.updateItem('array.path', itemId, updates)
+StateManager.removeItem('array.path', itemId)
 ```
 
-## Component Structure
+## Component Architecture
 
-Each component follows a consistent pattern:
+### Common Component Pattern
 
-1. **Initialization**: Setup and initial render
-2. **DOM Caching**: Store references to DOM elements
-3. **Event Binding**: Attach event listeners
-4. **Rendering**: Update DOM based on current state
-5. **Action Methods**: Handle user interactions
+Each component follows this structure:
+
+```javascript
+const ComponentName = (function() {
+    // 1. Private Variables & DOM Elements
+    let _elements = { /* DOM references */ };
+    let _state = { /* component state */ };
+    
+    // 2. DOM Manipulation & Rendering
+    function _cacheDOM() { /* cache DOM elements */ }
+    function _render() { /* render component */ }
+    
+    // 3. Event Handlers
+    function _bindEvents() { /* bind event listeners */ }
+    function _handleEvent() { /* handle specific events */ }
+    
+    // 4. State Management
+    function _handleStateChange() { /* handle state updates */ }
+    
+    // 5. Helper Functions
+    function _helperFunction() { /* utility functions */ }
+    
+    // 6. Initialization
+    function init() {
+        _cacheDOM();
+        _bindEvents();
+        _render();
+    }
+    
+    // 7. Public API
+    return {
+        init,
+        // Other public methods
+    };
+})();
+```
+
+### Implemented Components
+
+#### Story Navigator
+- **Purpose**: Manages plot threads, story beats, and narrative flow
+- **Features**:
+  - Thread listing and filtering
+  - Beat display with reveal toggling
+  - Relationship visualization
+  - Thread and beat creation/editing
+- **State Paths**: `story.plotThreads`, `story.storyBeats`
+- **Events**: Thread selection, beat reveal, relationship updates
+
+#### Character Manager
+- **Purpose**: Manages PCs, NPCs, and their relationships
+- **Features**:
+  - Separate PC and NPC lists with filtering
+  - Detailed character information display
+  - Character relationship management
+  - Character creation and editing
+- **State Paths**: `characters.playerCharacters`, `characters.npcs`, `characters.relationships`
+- **Events**: Character selection, relationship updates, character updates
 
 ### Component Communication
 
-Components communicate exclusively through the state manager:
+Components communicate through the state manager using:
 
-1. Component A updates state via `StateManager.update()`
-2. State manager emits `stateChanged` event
-3. Component B receives event and re-renders
-
-## Data Persistence
-
-Application state is periodically saved to local storage and loaded on startup:
-
+1. **State Updates**:
 ```javascript
-// Save state
-localStorage.setItem('dmHudState', JSON.stringify(state));
-
-// Load state
-const savedState = localStorage.getItem('dmHudState');
-if (savedState) {
-  state = JSON.parse(savedState);
-}
+StateManager.updateItem('characters.playerCharacters', characterId, updates);
 ```
 
-## UI Design Decisions
+2. **State Change Events**:
+```javascript
+document.addEventListener('stateChanged', (e) => {
+    const { path } = e.detail;
+    if (path.startsWith('characters.')) {
+        _render();
+    }
+});
+```
+
+3. **DOM Events** (for direct user interactions):
+```javascript
+element.addEventListener('click', _handleClick);
+```
+
+## UI Implementation
 
 ### Layout Structure
 
-- Tab-based navigation for major components
-- Card-based UI for story and character elements
-- List-based UI for combat tracking
-- Context-specific panels that appear when needed
+```
++------------------+------------------+------------------+
+|    Navigation    |     Content     |     Details     |
+|                 |                 |                 |
+| - Tab Selection | - Main Display  | - Detail Panel  |
+| - Quick Actions | - List Views    | - Edit Forms    |
+| - Filters       | - Visualizations| - Relationships |
+|                 |                 |                 |
++------------------+------------------+------------------+
+```
 
-### Visual Hierarchy
+### Component-Specific UI
 
-- Primary information: Large, prominent placement
-- Secondary information: Smaller, collapsible sections
-- Contextual actions: Adjacent to relevant content
-- Global actions: Fixed position in header/footer
+#### Story Navigator
+- Three-panel layout: Threads → Beats → Relationships
+- Card-based thread and beat display
+- Relationship visualization with force-directed graph
+- Inline editing capabilities
 
-### Color System
+#### Character Manager
+- Two-panel layout with detail sidebar
+- Tabbed interface for PC/NPC switching
+- Grid layout for character details
+- Relationship matrix visualization
 
-- Background: Dark, low-contrast for eye comfort
-- Text: High contrast for readability
-- Status indicators: Color-coded (green/yellow/red)
-- Relationship indicators: Color-coded (blue/gray/red)
-- Selection highlights: Distinct accent color
+### Visual Styling
+
+- **Color System**:
+  ```css
+  :root {
+    --bg-primary: #1a1a1a;
+    --bg-secondary: #2d2d2d;
+    --text-primary: #ffffff;
+    --text-secondary: #b3b3b3;
+    --accent-primary: #4a9eff;
+    --accent-secondary: #ff4a4a;
+    --status-success: #4caf50;
+    --status-warning: #ff9800;
+    --status-danger: #f44336;
+  }
+  ```
+
+## Development Guidelines
+
+### Code Organization
+- Components in `scripts/components/`
+- State management in `scripts/state/`
+- Utilities in `scripts/utils/`
+- Styles in `styles/`
+
+### Naming Conventions
+- Components: PascalCase (e.g., `StoryNavigator`)
+- Private methods/variables: underscore prefix (e.g., `_handleClick`)
+- Event handlers: verb prefix (e.g., `handleClick`, `onStateChange`)
+- CSS classes: kebab-case (e.g., `character-list`)
+
+### Best Practices
+- Use event delegation for dynamic elements
+- Debounce frequent operations (filtering, saving)
+- Maintain clear separation of concerns
+- Document complex logic with JSDoc comments
+- Follow functional programming principles where appropriate
+
+## Future Enhancements
+
+### Planned Features
+1. Character Sheet Integration
+2. Combat Tracker Enhancement
+3. Map Management System
+4. Timeline Visualization
+5. Session Notes System
+
+### Technical Improvements
+1. State persistence optimization
+2. Performance monitoring
+3. Offline support
+4. Data export/import
+5. Undo/redo functionality
 
 ## Implementation Phases
 

@@ -1,0 +1,39 @@
+// DM HUD Project Configuration
+Project Type: Interactive DM screen for tabletop RPGs
+Core Stack: Vanilla JavaScript (ES6+), HTML5, CSS3, Local Storage
+
+Coding Standards:
+- Module pattern for component organization
+- Event-driven architecture
+- State management through centralized store
+- Descriptive naming for readability
+- JSDoc comments for complex logic
+
+Architecture Patterns:
+- Component-based UI
+- Pub/Sub event system
+- Immutable state updates
+- Local storage persistence
+
+Component Structure:
+- Each component should follow init/cacheDOM/bindEvents/render pattern
+- Components should not directly modify DOM outside their container
+- Data flow through state manager only
+- Clear separation between data and presentation
+
+Security Requirements:
+- No external dependencies or API calls
+- Input validation for all user-provided data
+- Safe local storage handling
+
+Testing Strategy:
+- Manual testing of UI interactions
+- Console logging for state transitions
+- Local storage persistence verification
+
+Design Principles:
+- Focus on cognitive optimization 
+- Minimize context switching
+- Prioritize glanceability of information
+- Color coding for fast identification
+- Responsive layout for different screen sizes

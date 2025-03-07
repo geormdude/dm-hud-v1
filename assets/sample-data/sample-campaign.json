@@ -1,0 +1,33 @@
+{
+    "id": "campaign-001",
+    "name": "The Lost Mines of Phandelver",
+    "description": "A D&D 5E starter campaign for levels 1-5",
+    "currentLocation": "Phandalin",
+    "chapters": [
+        {
+            "id": "chapter-001",
+            "title": "Goblin Arrows",
+            "description": "The adventure begins on the road to Phandalin",
+            "locations": [
+                {
+                    "id": "loc-001",
+                    "name": "Goblin Ambush",
+                    "description": "A hidden ambush along the Triboar Trail",
+                    "notes": "Two dead horses lie across the trail..."
+                }
+            ],
+            "npcs": [
+                {
+                    "id": "npc-001",
+                    "name": "Sildar Hallwinter",
+                    "role": "Quest Giver",
+                    "status": "Captured"
+                }
+            ]
+        }
+    ],
+    "activeChapterId": "chapter-001",
+    "partyLevel": 1,
+    "createdAt": "2024-03-07T12:00:00Z",
+    "lastModified": "2024-03-07T12:00:00Z"
+} 

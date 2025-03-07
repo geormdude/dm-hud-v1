@@ -1,0 +1,308 @@
+/* 
+ * Story Navigator Component Styles
+ * 
+ * Contents:
+ * 1. Layout & Structure
+ * 2. Thread List
+ * 3. Beat Display
+ * 4. Relationship Map
+ * 5. Empty States
+ * 6. Controls & Actions
+ * 7. Animations
+ */
+
+/* ============================
+   1. LAYOUT & STRUCTURE
+   ============================ */
+#story-navigator {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: var(--space-4);
+    height: 100%;
+    padding: var(--space-4);
+}
+
+.story-panel {
+    background-color: var(--color-bg-secondary);
+    border-radius: var(--border-radius-md);
+    padding: var(--space-4);
+    overflow-y: auto;
+}
+
+/* ============================
+   2. THREAD LIST
+   ============================ */
+.thread-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.thread-item {
+    position: relative;
+    padding: var(--space-3);
+    margin-bottom: var(--space-2);
+    background-color: var(--color-bg-tertiary);
+    border-radius: var(--border-radius-sm);
+    border-left: var(--border-width-thick) solid var(--color-accent-story);
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.thread-item:hover {
+    transform: translateX(4px);
+    background-color: var(--color-highlight);
+}
+
+.thread-item.active {
+    background-color: var(--color-accent-story);
+    color: var(--color-bg-primary);
+}
+
+/* Thread Status Indicators */
+.thread-status {
+    position: absolute;
+    right: var(--space-3);
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    gap: var(--space-2);
+    align-items: center;
+}
+
+.status-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.status-active { background-color: var(--color-success); }
+.status-paused { background-color: var(--color-warning); }
+.status-completed { background-color: var(--color-info); }
+.status-hidden { background-color: var(--color-text-muted); }
+
+/* Thread Details */
+.thread-title {
+    font-weight: 500;
+    margin-bottom: var(--space-1);
+}
+
+.thread-description {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+}
+
+/* ============================
+   3. BEAT DISPLAY
+   ============================ */
+.beat-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.beat-card {
+    background-color: var(--color-bg-tertiary);
+    border-radius: var(--border-radius-sm);
+    padding: var(--space-3);
+    transition: var(--transition-normal);
+}
+
+/* Beat Reveal/Hide Functionality */
+.beat-content {
+    overflow: hidden;
+    transition: max-height var(--transition-normal);
+}
+
+.beat-card.hidden .beat-content {
+    max-height: 0;
+}
+
+.beat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-2);
+}
+
+.beat-title {
+    font-weight: 500;
+    color: var(--color-text-primary);
+}
+
+.beat-actions {
+    display: flex;
+    gap: var(--space-2);
+}
+
+.reveal-toggle {
+    background: none;
+    border: none;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    padding: var(--space-1);
+    transition: var(--transition-fast);
+}
+
+.reveal-toggle:hover {
+    color: var(--color-accent-story);
+}
+
+/* Beat Status and Tags */
+.beat-meta {
+    display: flex;
+    gap: var(--space-2);
+    margin-bottom: var(--space-2);
+}
+
+.beat-tag {
+    font-size: var(--font-size-xs);
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--border-radius-sm);
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-secondary);
+}
+
+/* ============================
+   4. RELATIONSHIP MAP
+   ============================ */
+.relationship-map {
+    position: relative;
+    height: 100%;
+    background-color: var(--color-bg-tertiary);
+    border-radius: var(--border-radius-sm);
+    overflow: hidden;
+}
+
+.relationship-placeholder {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: var(--color-text-muted);
+}
+
+.relationship-controls {
+    position: absolute;
+    bottom: var(--space-4);
+    right: var(--space-4);
+    display: flex;
+    gap: var(--space-2);
+}
+
+/* ============================
+   5. EMPTY STATES
+   ============================ */
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: var(--space-6);
+    color: var(--color-text-muted);
+}
+
+.empty-state-icon {
+    font-size: var(--font-size-3xl);
+    margin-bottom: var(--space-4);
+}
+
+.empty-state-text {
+    margin-bottom: var(--space-4);
+}
+
+.empty-state-action {
+    background-color: var(--color-accent-story);
+    color: var(--color-bg-primary);
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--border-radius-sm);
+    border: none;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.empty-state-action:hover {
+    filter: brightness(1.1);
+}
+
+/* ============================
+   6. CONTROLS & ACTIONS
+   ============================ */
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-4);
+}
+
+.panel-title {
+    font-size: var(--font-size-lg);
+    font-weight: 500;
+    color: var(--color-accent-story);
+}
+
+.panel-actions {
+    display: flex;
+    gap: var(--space-2);
+}
+
+.action-button {
+    padding: var(--space-2);
+    background-color: var(--color-bg-primary);
+    border: var(--border-width-thin) solid var(--color-border);
+    border-radius: var(--border-radius-sm);
+    color: var(--color-text-primary);
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.action-button:hover {
+    background-color: var(--color-accent-story);
+    color: var(--color-bg-primary);
+    border-color: var(--color-accent-story);
+}
+
+/* ============================
+   7. ANIMATIONS
+   ============================ */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from { transform: translateX(-10px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+.thread-item {
+    animation: slideIn 0.3s ease-out;
+}
+
+.beat-card {
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    #story-navigator {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto 1fr;
+    }
+
+    .relationship-map {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 640px) {
+    #story-navigator {
+        grid-template-columns: 1fr;
+    }
+
+    .thread-item:hover {
+        transform: none;
+    }
+} 
