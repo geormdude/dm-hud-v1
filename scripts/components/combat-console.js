@@ -54,9 +54,9 @@ const CombatConsole = (function() {
             return false;
         }
         
-        _elements.initiativeList = _elements.container.querySelector('.initiative-list');
-        _elements.combatControls = _elements.container.querySelector('.combat-controls');
-        _elements.combatantDetail = _elements.container.querySelector('.combatant-detail');
+        _elements.initiativeList = document.getElementById('initiative-list');
+        _elements.combatControls = document.getElementById('combat-controls');
+        _elements.combatantDetail = document.getElementById('combat-detail');
         _elements.startCombatButton = _elements.container.querySelector('.start-combat-button');
         _elements.endCombatButton = _elements.container.querySelector('.end-combat-button');
         _elements.nextTurnButton = _elements.container.querySelector('.next-turn-button');

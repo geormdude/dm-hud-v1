@@ -206,7 +206,6 @@ element.addEventListener('click', _handleClick);
 ```
 
 ### Component-Specific UI
-
 #### Story Navigator
 
 - Three-panel layout: Threads → Beats → Relationships

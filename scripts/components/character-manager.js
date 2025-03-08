@@ -55,9 +55,9 @@ const CharacterManager = (function() {
             return false;
         }
         
-        _elements.pcList = _elements.container.querySelector('.pc-list');
-        _elements.npcList = _elements.container.querySelector('.npc-list');
-        _elements.detailPanel = _elements.container.querySelector('.character-detail');
+        _elements.pcList = document.getElementById('character-list');
+        _elements.npcList = document.getElementById('npc-list');
+        _elements.detailPanel = document.getElementById('character-detail');
         _elements.newCharacterButton = _elements.container.querySelector('.new-character-button');
         _elements.newNpcButton = _elements.container.querySelector('.new-npc-button');
         _elements.pcFilter = _elements.container.querySelector('.pc-filter');
