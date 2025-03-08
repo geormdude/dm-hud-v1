@@ -115,6 +115,61 @@ const DataUtils = (function() {
         });
     }
     
+    /**
+     * Creates an immutable copy of an object with updates applied
+     * @param {Object} obj - The original object
+     * @param {Object} updates - The updates to apply
+     * @return {Object} A new object with updates applied
+     */
+    function immutableUpdate(obj, updates) {
+        // Return a new object with the updates applied
+        return { ...obj, ...updates };
+    }
+    
+    /**
+     * Creates an immutable copy of an array with an item added
+     * @param {Array} array - The original array
+     * @param {*} item - The item to add
+     * @return {Array} A new array with the item added
+     */
+    function immutableArrayAdd(array, item) {
+        // Return a new array with the item added
+        return [...array, item];
+    }
+    
+    /**
+     * Creates an immutable copy of an array with an item updated
+     * @param {Array} array - The original array
+     * @param {Function} predicate - Function to identify the item to update
+     * @param {Object|Function} updates - Updates to apply or function that returns updates
+     * @return {Array} A new array with the item updated
+     */
+    function immutableArrayUpdate(array, predicate, updates) {
+        // Return a new array with the item updated
+        return array.map(item => {
+            if (predicate(item)) {
+                // If updates is a function, call it with the item
+                if (typeof updates === 'function') {
+                    return { ...item, ...updates(item) };
+                }
+                // Otherwise, apply the updates directly
+                return { ...item, ...updates };
+            }
+            return item;
+        });
+    }
+    
+    /**
+     * Creates an immutable copy of an array with an item removed
+     * @param {Array} array - The original array
+     * @param {Function} predicate - Function to identify the item to remove
+     * @return {Array} A new array with the item removed
+     */
+    function immutableArrayRemove(array, predicate) {
+        // Return a new array with the item removed
+        return array.filter(item => !predicate(item));
+    }
+    
     // Public API
     return {
         generateId,
@@ -123,7 +178,11 @@ const DataUtils = (function() {
         setNestedProperty,
         sortByProperty,
         filterByProperty,
-        searchByText
+        searchByText,
+        immutableUpdate,
+        immutableArrayAdd,
+        immutableArrayUpdate,
+        immutableArrayRemove
     };
 })();
 
