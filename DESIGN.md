@@ -142,6 +142,7 @@ const ComponentName = (function() {
 ### Implemented Components
 
 #### Story Navigator
+
 - **Purpose**: Manages plot threads, story beats, and narrative flow
 - **Features**:
   - Thread listing and filtering
@@ -152,6 +153,7 @@ const ComponentName = (function() {
 - **Events**: Thread selection, beat reveal, relationship updates
 
 #### Character Manager
+
 - **Purpose**: Manages PCs, NPCs, and their relationships
 - **Features**:
   - Separate PC and NPC lists with filtering
@@ -166,11 +168,13 @@ const ComponentName = (function() {
 Components communicate through the state manager using:
 
 1. **State Updates**:
+
 ```javascript
 StateManager.updateItem('characters.playerCharacters', characterId, updates);
 ```
 
 2. **State Change Events**:
+
 ```javascript
 document.addEventListener('stateChanged', (e) => {
     const { path } = e.detail;
@@ -181,6 +185,7 @@ document.addEventListener('stateChanged', (e) => {
 ```
 
 3. **DOM Events** (for direct user interactions):
+
 ```javascript
 element.addEventListener('click', _handleClick);
 ```
@@ -203,12 +208,14 @@ element.addEventListener('click', _handleClick);
 ### Component-Specific UI
 
 #### Story Navigator
+
 - Three-panel layout: Threads → Beats → Relationships
 - Card-based thread and beat display
 - Relationship visualization with force-directed graph
 - Inline editing capabilities
 
 #### Character Manager
+
 - Two-panel layout with detail sidebar
 - Tabbed interface for PC/NPC switching
 - Grid layout for character details
@@ -217,6 +224,7 @@ element.addEventListener('click', _handleClick);
 ### Visual Styling
 
 - **Color System**:
+
   ```css
   :root {
     --bg-primary: #1a1a1a;
@@ -234,18 +242,21 @@ element.addEventListener('click', _handleClick);
 ## Development Guidelines
 
 ### Code Organization
+
 - Components in `scripts/components/`
 - State management in `scripts/state/`
 - Utilities in `scripts/utils/`
 - Styles in `styles/`
 
 ### Naming Conventions
+
 - Components: PascalCase (e.g., `StoryNavigator`)
 - Private methods/variables: underscore prefix (e.g., `_handleClick`)
 - Event handlers: verb prefix (e.g., `handleClick`, `onStateChange`)
 - CSS classes: kebab-case (e.g., `character-list`)
 
 ### Best Practices
+
 - Use event delegation for dynamic elements
 - Debounce frequent operations (filtering, saving)
 - Maintain clear separation of concerns
@@ -255,6 +266,7 @@ element.addEventListener('click', _handleClick);
 ## Future Enhancements
 
 ### Planned Features
+
 1. Character Sheet Integration
 2. Combat Tracker Enhancement
 3. Map Management System
@@ -262,6 +274,7 @@ element.addEventListener('click', _handleClick);
 5. Session Notes System
 
 ### Technical Improvements
+
 1. State persistence optimization
 2. Performance monitoring
 3. Offline support
@@ -271,30 +284,35 @@ element.addEventListener('click', _handleClick);
 ## Implementation Phases
 
 ### Phase 1: Core Infrastructure
+
 - Basic HTML structure
 - State manager implementation
 - Tab navigation system
 - Local storage persistence
 
 ### Phase 2: Story Navigator
+
 - Thread list implementation
 - Beat display system
 - Reveal toggling
 - Basic relationship visualization
 
 ### Phase 3: Character Manager
+
 - Character/NPC lists
 - Detail panel implementation
 - Selection behavior
 - Basic filtering
 
 ### Phase 4: Combat Console
+
 - Initiative tracker
 - Turn management
 - HP/condition tracking
 - Combat state toggling
 
 ### Phase 5: Integration & Refinement
+
 - Cross-component interactions
 - UI polish
 - Performance optimization
@@ -303,21 +321,27 @@ element.addEventListener('click', _handleClick);
 ## Technical Decisions
 
 ### Vanilla JS Approach
+
 We've chosen vanilla JavaScript over frameworks to:
+
 - Minimize cognitive load in codebase
 - Maintain full control over performance
 - Avoid dependency management
 - Simplify long-term maintenance
 
 ### Module Pattern
+
 Components use the revealing module pattern for:
+
 - Private/public method separation
 - Clean interface definition
 - Encapsulation of internal workings
 - Prevention of global namespace pollution
 
 ### Event-Driven Architecture
+
 The application uses custom events for:
+
 - Loose coupling between components
 - Simplified testing and debugging
 - Extensibility for future features
