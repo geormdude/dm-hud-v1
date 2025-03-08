@@ -54,9 +54,9 @@ const StoryNavigator = (function() {
             return false;
         }
         
-        _elements.threadList = _elements.container.querySelector('.thread-list');
-        _elements.beatDisplay = _elements.container.querySelector('.beat-display');
-        _elements.relationshipMap = _elements.container.querySelector('.relationship-map');
+        _elements.threadList = document.getElementById('thread-list');
+        _elements.beatDisplay = document.getElementById('beat-display');
+        _elements.relationshipMap = document.getElementById('relationship-map');
         _elements.newThreadButton = _elements.container.querySelector('.new-thread-button');
         _elements.newBeatButton = _elements.container.querySelector('.new-beat-button');
         _elements.threadFilter = _elements.container.querySelector('.thread-filter');
