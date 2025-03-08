@@ -1,0 +1,38 @@
+{
+  "name": "dm-hud",
+  "version": "1.0.0",
+  "description": "Dungeon Master's Heads-Up Display",
+  "main": "index.html",
+  "scripts": {
+    "start": "node server.js",
+    "start:port": "node server.js --port=3000",
+    "test": "node run-tests.js",
+    "test:visual": "node run-tests.js --no-headless",
+    "test:integration": "node run-tests.js --report-file=integration-report.json",
+    "test:performance": "node run-tests.js --report-file=performance-report.json",
+    "pretest": "npx kill-port 8080 || true",
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourusername/dm-hud.git"
+  },
+  "keywords": [
+    "dm",
+    "dungeon-master",
+    "rpg",
+    "tabletop",
+    "game"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yourusername/dm-hud/issues"
+  },
+  "homepage": "https://github.com/yourusername/dm-hud#readme",
+  "devDependencies": {
+    "kill-port": "^2.0.1",
+    "nodemon": "^3.1.9",
+    "puppeteer": "^19.7.0"
+  }
+}

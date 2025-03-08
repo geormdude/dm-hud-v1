@@ -1,0 +1,134 @@
+/**
+ * Character Manager Component Styles
+ */
+
+/* Character manager container */
+#character-manager {
+    display: flex;
+    height: 100%;
+}
+
+/* Panels */
+#character-manager .panel {
+    padding: 15px;
+    overflow-y: auto;
+    border-right: 1px solid #444;
+}
+
+#character-list {
+    width: 25%;
+}
+
+#npc-list {
+    width: 25%;
+}
+
+#character-detail {
+    width: 50%;
+    border-right: none;
+}
+
+/* Character list items */
+.character-item {
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #333;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.character-item:hover {
+    background-color: #444;
+}
+
+.character-item.selected {
+    background-color: #3498db;
+    color: #fff;
+}
+
+.character-item .character-name {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.character-item .character-info {
+    font-size: 0.9em;
+    color: #ccc;
+}
+
+/* Character details */
+.character-details {
+    padding: 15px;
+}
+
+.character-details h2 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #444;
+    padding-bottom: 10px;
+}
+
+.character-details .character-stats {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.character-details .stat-block {
+    width: 33.33%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.character-details .stat-label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.character-details .stat-value {
+    font-size: 1.2em;
+}
+
+.character-details .character-notes {
+    margin-top: 20px;
+}
+
+.character-details .character-notes h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+/* Character filters */
+.character-filters {
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #444;
+}
+
+.character-filters input {
+    width: 100%;
+    padding: 8px;
+    background-color: #333;
+    border: 1px solid #444;
+    color: #fff;
+    border-radius: 4px;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    #character-manager {
+        flex-direction: column;
+    }
+    
+    #character-manager .panel {
+        width: 100% !important;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid #444;
+    }
+    
+    #character-detail {
+        border-bottom: none;
+    }
+} 

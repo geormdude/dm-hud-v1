@@ -1,0 +1,195 @@
+/**
+ * Combat Console Component Styles
+ */
+
+/* Combat console container */
+#combat-console {
+    display: flex;
+    height: 100%;
+}
+
+/* Panels */
+#combat-console .panel {
+    padding: 15px;
+    overflow-y: auto;
+    border-right: 1px solid #444;
+}
+
+#combat-controls {
+    width: 20%;
+}
+
+#initiative-list {
+    width: 30%;
+}
+
+#combat-detail {
+    width: 50%;
+    border-right: none;
+}
+
+/* Combat controls */
+.combat-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s ease;
+}
+
+.combat-button:hover {
+    background-color: #2980b9;
+}
+
+.combat-button.danger {
+    background-color: #e74c3c;
+}
+
+.combat-button.danger:hover {
+    background-color: #c0392b;
+}
+
+.combat-button.success {
+    background-color: #2ecc71;
+}
+
+.combat-button.success:hover {
+    background-color: #27ae60;
+}
+
+/* Initiative list */
+.initiative-item {
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #333;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.initiative-item:hover {
+    background-color: #444;
+}
+
+.initiative-item.active {
+    background-color: #3498db;
+    color: #fff;
+}
+
+.initiative-item .initiative-roll {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.initiative-item .combatant-name {
+    font-weight: bold;
+}
+
+.initiative-item .combatant-info {
+    font-size: 0.9em;
+    color: #ccc;
+    margin-top: 5px;
+}
+
+.initiative-item .hp-bar {
+    height: 5px;
+    background-color: #e74c3c;
+    margin-top: 5px;
+    border-radius: 2px;
+}
+
+/* Combat details */
+.combat-details {
+    padding: 15px;
+}
+
+.combat-details h2 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #444;
+    padding-bottom: 10px;
+}
+
+.combat-details .combatant-stats {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.combat-details .stat-block {
+    width: 33.33%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.combat-details .stat-label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.combat-details .stat-value {
+    font-size: 1.2em;
+}
+
+/* Conditions */
+.conditions-list {
+    margin-top: 20px;
+}
+
+.conditions-list h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.condition-tag {
+    display: inline-block;
+    padding: 5px 10px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    background-color: #e74c3c;
+    color: #fff;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+
+/* Round counter */
+.round-counter {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #333;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.round-counter .round-label {
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.round-counter .round-number {
+    font-size: 1.2em;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    #combat-console {
+        flex-direction: column;
+    }
+    
+    #combat-console .panel {
+        width: 100% !important;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid #444;
+    }
+    
+    #combat-detail {
+        border-bottom: none;
+    }
+} 
